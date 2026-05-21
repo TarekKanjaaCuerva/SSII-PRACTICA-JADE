@@ -11,7 +11,7 @@
                 "$Auto",
                 "${workspaceFolder}/lib/jade.jar",
                 "${workspaceFolder}/lib/commons-codec.jar",
-                "${workspaceFolder}/lib/jsoup-1.17.2.jar"
+                "${workspaceFolder}/lib/jsoup-1.22.2.jar"
             ]
         }
     ]
