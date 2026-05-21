@@ -1,4 +1,4 @@
-package es.upm.practica;
+package es.upm.practica.agents;
 
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;

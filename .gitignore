@@ -29,3 +29,4 @@ MTPs-Main-Container.txt
 
 # Permitir subir las librerias locales de la practica
 !lib/*.jar
+/bin/
