@@ -48,6 +48,6 @@ public class Song implements Serializable {
 
     @Override
     public String toString() {
-        return title + " - " + artist + " (" + genre + ") [" + mood + "]";
+        return title + " de " + artist;
     }
 }

@@ -103,14 +103,32 @@ public class AgenteRecomendadorMusical extends AgentBase {
                 // Leemos todas las canciones disponibles desde el fichero CSV y filtramos por emoción obtenida
                 List<Song> allSongs = leerCancionesDesdeCSV();
                 List<Song> recommendedSongs = recomendarPorMood(allSongs, mood);
+                
+                String explanation;
 
-                // Si no se encuentra ninguna canción para ese mood, respondemos con FAILURE
+                // Si no hay canciones para el mood recibido, usamos NEUTRO como alternativa.
+                if (recommendedSongs.isEmpty() && !mood.equals("NEUTRO")) {
+                	String originalMood = mood;
+
+                	mood = "NEUTRO";
+                	recommendedSongs = recomendarPorMood(allSongs, mood);
+
                 if (recommendedSongs.isEmpty()) {
-                    enviarFailure(request, "No se han encontrado canciones para el mood: " + mood);
+                    enviarFailure(request, "No se han encontrado canciones para el mood recibido ni para NEUTRO.");
                     return;
-                }
+                 }
 
-                String explanation = generarExplicacion(mood, recommendedSongs);
+                 explanation = generarExplicacionMoodNoDisponible(originalMood, recommendedSongs);
+
+                 log("No había canciones para " + originalMood + ". Enviada playlist NEUTRO como alternativa.");
+               } else {
+                 	if (recommendedSongs.isEmpty()) {
+                 		enviarFailure(request, "No se han encontrado canciones para el mood: " + mood);
+                 		return;
+                 }
+
+                 explanation = generarExplicacion(mood, recommendedSongs);
+               }
 
                 // Creamos el objeto PlaylistResult que se enviará como respuesta
                 PlaylistResult playlist = new PlaylistResult(mood, recommendedSongs, explanation);
@@ -272,6 +290,27 @@ public class AgenteRecomendadorMusical extends AgentBase {
                         + "del texto y el mood asociado a cada canción en la base de datos. Las canciones recomendadas son: "
                         + canciones + ".";
         }
+    }
+    
+    /**
+     * Genera una explicación cuando el mood recibido no está contemplado
+     * en la base de canciones y se usa NEUTRO como alternativa.
+     *
+     * @param originalMood mood recibido inicialmente
+     * @param songs canciones neutras recomendadas
+     * @return explicación textual de la recomendación alternativa
+     */
+    private String generarExplicacionMoodNoDisponible(String originalMood, List<Song> songs) {
+
+        String canciones = songs.stream()
+                .map(song -> song.getTitle() + " de " + song.getArtist())
+                .collect(Collectors.joining(", "));
+
+        return "El sistema ha recibido el estado de ánimo " + originalMood
+                + ", pero no hay canciones asociadas a esa emoción en la base de datos. "
+                + "Para evitar dejar la recomendación vacía, se propone una playlist neutra y equilibrada, "
+                + "pensada para acompañar el texto sin asociarlo a una emoción concreta. "
+                + "Las canciones recomendadas son: " + canciones + ".";
     }
     
     /**
