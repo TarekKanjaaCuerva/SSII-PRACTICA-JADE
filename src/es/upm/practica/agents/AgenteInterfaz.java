@@ -200,6 +200,7 @@ public class AgenteInterfaz extends AgentBase {
     // ==============================================================
 
     /**
+     * Se ejecuta al pulsar "Cargar .txt".
      * Abre un JFileChooser para cargar un .txt.
      * Pone el contenido del fichero en el área de texto.
      * El AgentePercepcion también acepta rutas de fichero, pero enviamos
@@ -225,13 +226,15 @@ public class AgenteInterfaz extends AgentBase {
     }
 
     /**
+     * Se ejecuta al pulsar "Analizar".
      * Lanza el flujo multiagente.
-     * El envío real ocurre dentro de un SequentialBehaviour (hilo JADE),
-     * nunca desde el Event Dispatch Thread de Swing.
+     * Tras pulsarlo se deshabilita el boton para que no se pueda usar 2 veces mientras se procesa
+     * El envío de mensajes JADE nunca se hace desde el hilo de Swing, 
+     * sino añadiendo un behaviour que se ejecuta en el hilo de JADE.
      */
     private void accionAnalizar(ActionEvent e) {
         String texto = areaTexto.getText().trim();
-        if (texto.isEmpty() || texto.startsWith("Pega aquí")) {
+        if (texto.isEmpty() || texto.startsWith("Pega aquí")) {		//Aqui comprueba que haya texto
             JOptionPane.showMessageDialog(ventana,
                     "Introduce o carga un texto primero.",
                     "Sin texto", JOptionPane.WARNING_MESSAGE);
@@ -249,11 +252,11 @@ public class AgenteInterfaz extends AgentBase {
 
     /**
      * Encadena los tres pasos del flujo:
-     *   Paso 1: texto  → AgentePercepcion      → ContentResult
-     *   Paso 2: ContentResult → AgenteAnalizador → MoodResult
-     *   Paso 3: MoodResult → AgenteRecomendador → PlaylistResult
+     *   Paso 1: texto  -> AgentePercepcion      -> ContentResult
+     *   Paso 2: ContentResult -> AgenteAnalizador -> MoodResult
+     *   Paso 3: MoodResult -> AgenteRecomendador -> PlaylistResult
      *
-     * Por qué SequentialBehaviour: garantiza que cada paso espera
+     * Usa SequentialBehaviour ya que garantiza que cada paso espera
      * al anterior antes de ejecutarse, sin bloquear el scheduler de JADE
      * más de lo necesario.
      */
@@ -261,11 +264,10 @@ public class AgenteInterfaz extends AgentBase {
 
         private static final long serialVersionUID = 1L;
 
-        // Se comparten entre pasos como "variables de pipeline"
         private ContentResult contentResult;
         private MoodResult moodResult;
         private PlaylistResult playlistResult;
-        private String errorMessage; // si no es null, hay que abortar
+        private String errorMessage;
 
         PipelineBehaviour(String textoUsuario) {
             // Paso 1: enviar texto a AgentePercepcion y recoger ContentResult
@@ -278,7 +280,7 @@ public class AgenteInterfaz extends AgentBase {
             addSubBehaviour(new PasoMostrarResultado());
         }
 
-        // ── PASO 1 ────────────────────────────────────────────────
+        // PASO 1
         private class PasoPercepcion extends OneShotBehaviour {
             private static final long serialVersionUID = 1L;
             private final String texto;
@@ -298,19 +300,17 @@ public class AgenteInterfaz extends AgentBase {
                 }
 
                 // AgentePercepcion espera el texto en request.getContent() (String plano)
-                // según su implementación: String input = request.getContent()
                 ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
                 msg.addReceiver(destino);
                 msg.setConversationId("pipeline-" + System.currentTimeMillis());
-                msg.setContent(texto); // texto plano, no objeto serializado
+                msg.setContent(texto); // texto plano (asi lo espera AgentePercepcion)
                 send(msg);
 
-                // Esperamos la respuesta: INFORM con ContentResult o FAILURE
-                // blockingReceive con filtro = filtro bloqueante requerido por la práctica
+                // Esperamos la respuesta INFORM con ContentResult o FAILURE
                 MessageTemplate mt = MessageTemplate.or(
                         MessageTemplate.MatchPerformative(ACLMessage.INFORM),
                         MessageTemplate.MatchPerformative(ACLMessage.FAILURE));
-                ACLMessage reply = blockingReceive(mt);
+                ACLMessage reply = blockingReceive(mt);	//filtro bloqueante
 
                 if (reply.getPerformative() == ACLMessage.FAILURE) {
                     errorMessage = "AgentePercepcion devolvió FAILURE: " + reply.getContent();
@@ -326,7 +326,7 @@ public class AgenteInterfaz extends AgentBase {
             }
         }
 
-        // ── PASO 2 ────────────────────────────────────────────────
+        // PASO 2
         private class PasoAnalisis extends OneShotBehaviour {
             private static final long serialVersionUID = 1L;
 
@@ -373,7 +373,7 @@ public class AgenteInterfaz extends AgentBase {
             }
         }
 
-        // ── PASO 3 ────────────────────────────────────────────────
+        // PASO 3
         private class PasoRecomendacion extends OneShotBehaviour {
             private static final long serialVersionUID = 1L;
 
@@ -420,7 +420,14 @@ public class AgenteInterfaz extends AgentBase {
             }
         }
 
-        // ── PASO 4: mostrar en GUI ─────────────────────────────────
+        // PASO 4
+        /**
+         * Comprueba si hubo errores en los pasos anteriores
+         * Si todo va bien, llama a mostrarPlaylist()
+         * Si algo falla, muestra el error en pantalla
+         * Reactiva el botón en cualquier caso
+         */
+        
         private class PasoMostrarResultado extends OneShotBehaviour {
             private static final long serialVersionUID = 1L;
 
@@ -488,7 +495,7 @@ public class AgenteInterfaz extends AgentBase {
     // ==============================================================
 
     /**
-     * Busca en el DF un agente que ofrezca el servicio indicado.
+     * Busca un agente que ofrezca el servicio indicado.
      * Usa searchAgents() de AgentBase, igual que el resto de agentes.
      */
     private AID buscarServicio(AgentModel tipo) {
@@ -500,7 +507,9 @@ public class AgenteInterfaz extends AgentBase {
         return null;
     }
 
-    /** Actualiza la barra de estado de forma segura desde cualquier hilo */
+    /** 
+     * Actualiza la barra de estado
+     */
     private void setEstado(String msg) {
         SwingUtilities.invokeLater(() -> labelEstado.setText(msg));
     }
