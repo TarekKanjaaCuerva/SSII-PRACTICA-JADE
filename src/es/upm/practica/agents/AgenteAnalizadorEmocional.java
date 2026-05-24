@@ -42,7 +42,7 @@ public class AgenteAnalizadorEmocional extends AgentBase {
         "fantastico", "maravilloso", "increible", "genial", "estupendo", "perfecto",
         "emocionante", "entusiasmo", "optimismo", "esperanza", "ilusion", "festivo",
         "sorpresa", "premio", "recompensa", "logro", "logros", "boda", "nacimiento",
-        "cumpleaños", "vacaciones", "diversion", "amor", "enamorado", "enamorada"
+        "cumpleanos", "vacaciones", "diversion", "amor", "enamorado", "enamorada"
     );
 
         //Tristeza
