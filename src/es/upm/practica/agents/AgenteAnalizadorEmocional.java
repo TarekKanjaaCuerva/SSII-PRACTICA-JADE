@@ -36,48 +36,48 @@ public class AgenteAnalizadorEmocional extends AgentBase {
     // a la emoción correspondiente. Se buscan como palabras completas (sin distinguir mayúsculas).
         //Alegría
     private static final List<String> PALABRAS_ALEGRIA = Arrays.asList(
-        "feliz", "felicidad", "alegre", "alegría", "contento", "contenta", "celebrar",
-        "celebración", "reir", "risa", "risas", "divertido", "divertida", "fiesta",
-        "euforia", "eufórico", "éxito", "triunfo", "victoria", "ganó", "gano",
-        "fantástico", "maravilloso", "increíble", "genial", "estupendo", "perfecto",
-        "emocionante", "entusiasmo", "optimismo", "esperanza", "ilusión", "festivo",
+        "feliz", "felicidad", "alegre", "alegria", "contento", "contenta", "celebrar",
+        "celebracion", "reir", "risa", "risas", "divertido", "divertida", "fiesta",
+        "euforia", "euforico", "exito", "triunfo", "victoria", "gano",
+        "fantastico", "maravilloso", "increible", "genial", "estupendo", "perfecto",
+        "emocionante", "entusiasmo", "optimismo", "esperanza", "ilusion", "festivo",
         "sorpresa", "premio", "recompensa", "logro", "logros", "boda", "nacimiento",
-        "cumpleaños", "vacaciones", "diversión", "amor", "enamorado", "enamorada"
+        "cumpleaños", "vacaciones", "diversion", "amor", "enamorado", "enamorada"
     );
 
         //Tristeza
     private static final List<String> PALABRAS_TRISTEZA = Arrays.asList(
         "triste", "tristeza", "llorar", "lloro", "lágrimas", "pena", "dolor",
-        "sufrimiento", "sufrir", "perdida", "pérdida", "muerte", "fallecido",
-        "fallecida", "murió", "murio", "duelo", "luto", "soledad", "solo", "sola",
-        "abandonado", "abandonada", "desamor", "ruptura", "fracaso", "decepción",
-        "decepcionado", "melancolía", "melancólico", "nostalgia", "añoranza",
-        "desesperanza", "desesperación", "abatimiento", "depresión", "deprimido",
-        "angustia", "angustiado", "desánimo", "desanimado", "amargura", "amargo",
+        "sufrimiento", "sufrir", "perdida", "muerte", "fallecido",
+        "fallecida", "murio", "duelo", "luto", "soledad", "solo", "sola",
+        "abandonado", "abandonada", "desamor", "ruptura", "fracaso", "decepcion",
+        "decepcionado", "melancolia", "melancolico", "nostalgia", "anoranza",
+        "desesperanza", "desesperacion", "abatimiento", "depresion", "deprimido",
+        "angustia", "angustiado", "desanimo", "desanimado", "amargura", "amargo",
         "lamento", "lamentable", "desgracia", "infeliz", "desconsuelo"
     );
 
         //Calma
     private static final List<String> PALABRAS_CALMA = Arrays.asList(
         "calma", "tranquilo", "tranquila", "tranquilidad", "paz", "sereno", "serena",
-        "serenidad", "relajado", "relajada", "relajación", "descanso", "descansar",
-        "reposar", "reposo", "equilibrio", "silencio", "meditación", "meditar",
+        "serenidad", "relajado", "relajada", "relajacion", "descanso", "descansar",
+        "reposar", "reposo", "equilibrio", "silencio", "meditacion", "meditar",
         "respirar", "suave", "lento", "lenta", "pausado", "pausada", "sosegado",
-        "sosegada", "sosiego", "armonía", "armónico", "natural", "naturaleza",
-        "contemplar", "contemplación", "reflexión", "reflexivo", "pacífico",
-        "paciente", "paciencia", "templanza", "estabilidad", "estable", "plácido",
-        "plácida", "apacible", "sencillo", "sencilla", "sencillez"
+        "sosegada", "sosiego", "armonia", "armonico", "natural", "naturaleza",
+        "contemplar", "contemplacion", "reflexion", "reflexivo", "pacifico",
+        "paciente", "paciencia", "templanza", "estabilidad", "estable", "placido",
+        "placida", "apacible", "sencillo", "sencilla", "sencillez"
     );
 
         //Tensión
     private static final List<String> PALABRAS_TENSION = Arrays.asList(
-        "tensión", "tenso", "tensa", "nervioso", "nerviosa", "nervios", "estrés",
+        "tension", "tenso", "tensa", "nervioso", "nerviosa", "nervios", "estres",
         "estresado", "estresada", "agitado", "agitada", "agitación", "urgente",
         "urgencia", "peligro", "peligroso", "amenaza", "amenazante", "conflicto",
-        "enfrentamiento", "pelea", "guerra", "ataque", "crisis", "caos", "pánico",
+        "enfrentamiento", "pelea", "guerra", "ataque", "crisis", "caos",
         "panico", "miedo", "terror", "alerta", "alarma", "violencia", "violento",
-        "explosión", "explosion", "accidente", "catástrofe", "desastre", "tragedia",
-        "colapso", "furia", "furioso", "rabia", "ira", "agresivo", "presión",
+        "explosion", "accidente", "catastrofe", "desastre", "tragedia",
+        "colapso", "furia", "furioso", "rabia", "ira", "agresivo", "presion",
         "urgentemente", "desesperado", "desesperada", "temor", "inquietud",
         "inquieto", "inquieta", "intranquilo", "intranquila", "perturbado"
     );
