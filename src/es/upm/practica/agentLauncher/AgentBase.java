@@ -15,7 +15,6 @@ public class AgentBase extends Agent {
 
     @Override
     protected void setup() {
-        super.setup();
 
         // Capturamos los parámetros que se le pasan al agente
         if (getArguments() != null) {
@@ -25,7 +24,9 @@ public class AgentBase extends Agent {
             this.params = new String[0];
         }
 
-        System.out.println("[" + getLocalName() + "] Agente iniciado - Tipo: " + type);
+        super.setup();
+        
+        System.out.println("[" + getLocalName() + "] Agente iniciado");
     }
 
     /**
