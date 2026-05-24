@@ -3,7 +3,6 @@ package es.upm.practica.common;
 import java.io.Serializable;
 import java.util.Map;
 
-// PARA LA PERSONA QUE MODIFIQUE ESTA CLASE QUE NO QUITE EL MÉTODO GETMOOD() PLIS
 public class MoodResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
