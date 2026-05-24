@@ -54,7 +54,7 @@ Asegúrate de tener en tu proyecto las siguientes librerías en el **Build Path*
 
 
 ## Datos de ejemplo (qué texto o moods puede introducir el usuario para probarlo).
-Puedes encontrar ejemplos de textos de prueba en la carpeta...
+Puedes encontrar ejemplos de textos de prueba en la carpeta pruebas.
 
 
 ## 🏗️ Arquitectura del Sistema
