@@ -104,7 +104,7 @@ flowchart TD
     style Usuario fill:#c8e6c9,stroke:#2e7d32
 ```
 
-## Declaración de IA (cómo la hemos usado, si la hemos usado).
+## Declaración de IA
 Durante el desarrollo de la práctica se ha utilizado inteligencia artificial como herramienta de apoyo, principalmente para tareas de organización, diseño y revisión. 
 
 En primer lugar, se utilizó para plantear las decisiones iniciales del sistema antes de que cada miembro comenzara a trabajar de forma individual. Por ejemplo, qué tipo de entrada debemos aceptar, qué agente coordina al resto o qué clases comunes creamos para pasar información de un agente a otro.
