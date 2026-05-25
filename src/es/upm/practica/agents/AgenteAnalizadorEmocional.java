@@ -120,7 +120,7 @@ public class AgenteAnalizadorEmocional extends AgentBase {
                 //Se intenta recibir un mensaje REQUEST
             ACLMessage request = receive(template);
 
-                //Si no hay mensaje, bloqueamos el comportamiento hasta que llegue uno, evitando
+                //Si no hay mensaje, bloqueamos el comportamiento hasta que llegue uno
             if (request == null) {
                 block();
                 return;
