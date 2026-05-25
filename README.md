@@ -23,15 +23,15 @@ El usuario introduce un texto o carga un fichero `.txt`. El sistema procesa la i
 - **Framework**: JADE 4.6.0
 - **IDE Recomendado**: Eclipse IDE
 - **Bibliotecas externas**:
-  - JADE (jade.jar + jadeTools.jar)
+  - JADE (jade.jar)
+  - Commons-codec (commons-codec.jar)
   - JSoup (para extracción de URLs - opcional)
 
 ### Dependencias necesarias para desarrollo en Eclipse
-Asegúrate de tener en tu proyecto las siguientes librerías en el **Build Path**:
+Las siguientes librerías se encuentran en la carpeta `lib` del proyecto:
 
-- `jade.jar`
-- `jadeTools.jar`
-- `commons-codec.jar` (si es necesario)
+- `jade.jar` (necesario)
+- `commons-codec.jar` (necesario)
 - `jsoup.jar` (opcional)
 
 ---
