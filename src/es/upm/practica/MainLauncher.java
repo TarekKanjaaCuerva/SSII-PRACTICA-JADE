@@ -9,7 +9,7 @@ public class MainLauncher {
 
     public static void main(String[] args) {
         try {
-            // ==================== CONFIGURACIÓN JADE ====================
+            // CONFIGURACIÓN JADE
             Profile profile = new ProfileImpl();
             profile.setParameter(Profile.MAIN_HOST, "localhost");
             profile.setParameter(Profile.GUI, "true"); // Activa la GUI de JADE (muy útil)
@@ -17,7 +17,7 @@ public class MainLauncher {
             // Crear contenedor principal
             ContainerController mainContainer = jade.core.Runtime.instance().createMainContainer(profile);
 
-            // ==================== LANZAR AGENTES ====================
+            // LANZAR AGENTES
 
             // 1. Agente Interfaz (coordinador + GUI)
             AgentController interfaz = mainContainer.createNewAgent(

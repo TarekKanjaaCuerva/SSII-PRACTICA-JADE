@@ -163,12 +163,8 @@ public class AgenteRecomendadorMusical extends AgentBase {
 
     /**
      * Lee el fichero CSV de canciones y convierte cada línea en un objeto Song.
-     *
      * El formato esperado del CSV es:
      * id;title;artist;genre;mood;description
-     *
-     * @return lista de canciones leídas del fichero CSV
-     * @throws IOException si hay un problema al leer el fichero
      */
     
     private List<Song> leerCancionesDesdeCSV() throws IOException {
@@ -219,12 +215,7 @@ public class AgenteRecomendadorMusical extends AgentBase {
     
     /**
      * Filtra las canciones según el mood recibido.
-     *
      * Se devuelven las primeras 3 canciones que coinciden en el CSV.
-     *
-     * @param allSongs lista completa de canciones
-     * @param mood estado de ánimo detectado
-     * @return lista de canciones recomendadas
      */
 
     private List<Song> recomendarPorMood(List<Song> allSongs, String mood) {
@@ -236,13 +227,8 @@ public class AgenteRecomendadorMusical extends AgentBase {
     
     /**
      * Genera una explicación personalizada según el estado de ánimo detectado.
-     *
      * La idea es que la interfaz no muestre solo una lista de canciones, sino también
      * una justificación sencilla de por qué esas canciones encajan con el texto analizado.
-     *
-     * @param mood estado de ánimo detectado
-     * @param songs canciones recomendadas
-     * @return explicación textual de la recomendación
      */
     
     private String generarExplicacion(String mood, List<Song> songs) {
@@ -295,10 +281,6 @@ public class AgenteRecomendadorMusical extends AgentBase {
     /**
      * Genera una explicación cuando el mood recibido no está contemplado
      * en la base de canciones y se usa NEUTRO como alternativa.
-     *
-     * @param originalMood mood recibido inicialmente
-     * @param songs canciones neutras recomendadas
-     * @return explicación textual de la recomendación alternativa
      */
     private String generarExplicacionMoodNoDisponible(String originalMood, List<Song> songs) {
 
@@ -315,13 +297,9 @@ public class AgenteRecomendadorMusical extends AgentBase {
     
     /**
      * Normaliza el estado de ánimo para evitar problemas de comparación.
-     *
      * Por ejemplo:
      * - "alegría" se convierte en "ALEGRIA"
      * - " Tristeza " se convierte en "TRISTEZA"
-     *
-     * @param mood estado de ánimo original
-     * @return estado de ánimo normalizado
      */
 
     private String normalizarMood(String mood) {
@@ -344,13 +322,9 @@ public class AgenteRecomendadorMusical extends AgentBase {
 
     /**
      * Envía un mensaje FAILURE al agente que hizo la petición.
-     *
      * Se usa cuando el recomendador no puede completar correctamente la recomendación,
      * por ejemplo porque el contenido recibido no es válido o porque no hay canciones
      * para el mood detectado.
-     *
-     * @param request mensaje original recibido
-     * @param errorMessage explicación del error
      */
     
     private void enviarFailure(ACLMessage request, String errorMessage) {

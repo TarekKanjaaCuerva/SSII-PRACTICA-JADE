@@ -18,9 +18,7 @@ public enum AgentModel {
         return this.value;
     }
 
-    /**
-     * Devuelve el enum a partir del String (útil para búsquedas)
-     */
+    // Devuelve el enum a partir del String (para búsquedas)
     public static AgentModel getEnum(String value) {
         if (value == null) return UNKNOWN;
 

@@ -67,9 +67,7 @@ public class AgentePercepcion extends AgentBase {
             }
         }
         
-        /**
-         * Lógica de extracción de texto para soportar las 3 vías propuestas.
-         */
+        // Lógica de extracción de texto para soportar las 3 vías propuestas.
         private String extraerTexto(String input) throws IOException {
             if (input == null || input.trim().isEmpty()) {
                 throw new IllegalArgumentException("La entrada recibida está vacía.");
@@ -77,7 +75,7 @@ public class AgentePercepcion extends AgentBase {
             
             input = input.trim();
             
-            // Es una URL
+            // Es una URL (no probado, lo hemos puesto por si daba tiempo a mejorar la interfaz y el usuario podía pegar una URL directamente)
             if (input.startsWith("http://") || input.startsWith("https://")) {
                 log("Detectada URL. Extrayendo contenido web con JSoup...");
                 Document doc = Jsoup.connect(input).get();

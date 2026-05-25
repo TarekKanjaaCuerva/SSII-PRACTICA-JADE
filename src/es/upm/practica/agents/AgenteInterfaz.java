@@ -67,16 +67,12 @@ public class AgenteInterfaz extends AgentBase {
         super.takeDown(); // AgentBase llama a deregisterService()
     }
 
-    // ==============================================================
-    //  CONSTRUCCIÓN DE LA INTERFAZ SWING
-    // ==============================================================
-
     /*
      * Contruye la ventana principal
      * Divide en tres zonas (con BorderLayout)
-     * 		- El título (north)
-     * 		- Para la entrada y el resultado (center)
-     * 		- Barra de estado (south) (barra inferior explicativa)
+     * 		- El título (arriba)
+     * 		- Para la entrada y el resultado (centro)
+     * 		- Barra de estado (abajo) (barra inferior explicativa)
      */
     private void construirInterfaz() {
         ventana = new JFrame("Recomendador Musical por Estado de Ánimo");
@@ -118,8 +114,8 @@ public class AgenteInterfaz extends AgentBase {
     /**
      * Crea el panel superior de Entrada (con JTextArea), donde el usuario escribe o pega texto y tiene 3 botones a la derecha
      * Incluye placeholder de color gris mientras no se escriba ni esté el cursor sobre este panel
-     * @return
      */
+
     private JPanel panelEntrada() {
         JPanel panel = new JPanel(new BorderLayout(8, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Texto de entrada"));
@@ -181,7 +177,6 @@ public class AgenteInterfaz extends AgentBase {
     
     /**
      * Crea panel inferior de Resultado. Solo de lectura.
-     * @return
      */
     private JPanel panelResultado() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -195,9 +190,7 @@ public class AgenteInterfaz extends AgentBase {
         return panel;
     }
 
-    // ==============================================================
     //  ACCIONES DE BOTONES
-    // ==============================================================
 
     /**
      * Se ejecuta al pulsar "Cargar .txt".
@@ -245,10 +238,7 @@ public class AgenteInterfaz extends AgentBase {
         setEstado("Iniciando pipeline multiagente...");
         addBehaviour(new PipelineBehaviour(texto));
     }
-
-    // ==============================================================
-    //  PIPELINE MULTIAGENTE — SequentialBehaviour con 3 pasos
-    // ==============================================================
+    // PipelineBehaviour
 
     /**
      * Encadena los tres pasos del flujo:
@@ -400,7 +390,7 @@ public class AgenteInterfaz extends AgentBase {
                 }
                 send(msg);
 
-                // Filtro bloqueante esperando INFORM o FAILURE
+                // esperando INFORM o FAILURE
                 MessageTemplate mt = MessageTemplate.or(
                         MessageTemplate.MatchPerformative(ACLMessage.INFORM),
                         MessageTemplate.MatchPerformative(ACLMessage.FAILURE));
@@ -450,10 +440,7 @@ public class AgenteInterfaz extends AgentBase {
         }
     }
 
-    // ==============================================================
     //  PRESENTACIÓN DEL RESULTADO
-    // ==============================================================
-
     /**
      * Formatea el PlaylistResult y lo pinta en el área de resultado.
      * Muestra: emoción detectada + explicación del análisis + canciones.
@@ -490,9 +477,7 @@ public class AgenteInterfaz extends AgentBase {
         areaResultado.setCaretPosition(0);
     }
 
-    // ==============================================================
     //  UTILIDADES
-    // ==============================================================
 
     /**
      * Busca un agente que ofrezca el servicio indicado.

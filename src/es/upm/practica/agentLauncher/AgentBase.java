@@ -29,9 +29,7 @@ public class AgentBase extends Agent {
         System.out.println("[" + getLocalName() + "] Agente iniciado");
     }
 
-    /**
-     * Registra este agente en el Directory Facilitator (DF)
-     */
+    // Registra este agente en el Directory Facilitator (DF)
     protected void registerService(AgentModel agentType) {
         this.type = agentType;
 
@@ -52,9 +50,7 @@ public class AgentBase extends Agent {
         }
     }
 
-    /**
-     * Busca agentes que ofrezcan un determinado servicio
-     */
+    // Busca agentes que ofrezcan un determinado servicio
     protected DFAgentDescription[] searchAgents(AgentModel agentType) {
         DFAgentDescription template = new DFAgentDescription();
         ServiceDescription sd = new ServiceDescription();
@@ -70,9 +66,7 @@ public class AgentBase extends Agent {
         }
     }
 
-    /**
-     * Deregistra el agente del DF (buena práctica antes de morir)
-     */
+    // Dar de baja del registro al agente del DF
     protected void deregisterService() {
         try {
             DFService.deregister(this);
@@ -89,7 +83,7 @@ public class AgentBase extends Agent {
         super.takeDown();
     }
 
-    // ====================== MÉTODOS DE AYUDA ======================
+    // MÉTODOS DE AYUDA
 
     protected void log(String msg) {
         System.out.println("[" + getLocalName() + "] " + msg);

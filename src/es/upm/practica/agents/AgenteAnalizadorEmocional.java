@@ -30,7 +30,7 @@ public class AgenteAnalizadorEmocional extends AgentBase {
 
     public static final String NICKNAME = "moodAnalyzer";
 
-    // ====================== PALABRAS CLAVE POR EMOCIÓN ======================
+    // PALABRAS CLAVE POR EMOCIÓN
 
     // Cada lista contiene términos que, si aparecen en el texto, suman 1 punto
     // a la emoción correspondiente. Se buscan como palabras completas (sin distinguir mayúsculas).
@@ -82,8 +82,6 @@ public class AgenteAnalizadorEmocional extends AgentBase {
         "inquieto", "inquieta", "intranquilo", "intranquila", "perturbado"
     );
 
-    // ====================== SETUP ======================
-
     @Override
     protected void setup() {
         super.setup();
@@ -97,7 +95,7 @@ public class AgenteAnalizadorEmocional extends AgentBase {
         log("Agente analizador emocional listo.");
     }
 
-    // ====================== COMPORTAMIENTO PRINCIPAL ======================
+    // COMPORTAMIENTO PRINCIPAL
     /*
      * Se queda en bucle esperando mensajes REQUEST del interfaz, 
      * con un ContentResult, analiza el texto y responde con un MoodResult.
@@ -111,7 +109,7 @@ public class AgenteAnalizadorEmocional extends AgentBase {
 
         private static final long serialVersionUID = 1L;
 
-            //Filtro bloqueante: solo procesamos mensajes REQUEST
+            // solo procesamos mensajes REQUEST
         private final MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
 
         @Override
@@ -180,17 +178,13 @@ public class AgenteAnalizadorEmocional extends AgentBase {
         }
     }
 
-    // ====================== ANÁLISIS ======================
+    // ANÁLISIS
 
     /**
      * Calcula las puntuaciones de cada emoción contando cuántas palabras clave
      * de cada lista aparecen en el texto.
-     *
      * El texto se normaliza (minúsculas, sin tildes) antes de buscar.
      * Cada palabra clave que aparece como token independiente suma 1 punto.
-     *
-     * @param texto texto extraído por el agente de percepción
-     * @return mapa con la puntuación de cada emoción
      */
     private Map<String, Integer> calcularScores(String texto) {
 
@@ -213,10 +207,6 @@ public class AgenteAnalizadorEmocional extends AgentBase {
     /**
      * Recorre la lista y cuenta cuántos tokens del texto coinciden con alguna 
      * palabra de la lista dada.
-     *
-     * @param tokens lista de palabras del texto ya normalizado
-     * @param palabras lista de palabras clave de una emoción
-     * @return número de coincidencias encontradas
      */
     private int contarCoincidencias(List<String> tokens, List<String> palabras) {
         int count = 0;
@@ -230,14 +220,10 @@ public class AgenteAnalizadorEmocional extends AgentBase {
 
     /**
      * Determina la emoción dominante a partir de las puntuaciones.
-     *
      * Reglas:
      * -Si todas las emociones están a 0 → NEUTRO
      * -Si hay empate entre dos o más emociones con la puntuación más alta → NEUTRO
      * -En caso contrario → la emoción con mayor puntuación
-     *
-     * @param scores mapa de puntuaciones por emoción
-     * @return nombre de la emoción dominante (en mayúsculas, sin tildes)
      */
     private String determinarMood(Map<String, Integer> scores) {
 
@@ -272,14 +258,9 @@ public class AgenteAnalizadorEmocional extends AgentBase {
 
     /**
      * Genera una explicación textual del resultado del análisis.
-     *
      * La explicación incluye la emoción detectada y un resumen de las
      * puntuaciones obtenidas para que el usuario entienda por qué se llegó
      * a ese resultado.
-     *
-     * @param mood emoción detectada
-     * @param scores puntuaciones obtenidas por emoción
-     * @return texto explicativo
      */
     private String generarExplicacion(String mood, Map<String, Integer> scores) {
 
@@ -320,14 +301,11 @@ public class AgenteAnalizadorEmocional extends AgentBase {
         }
     }
 
-    // ====================== UTILIDADES ======================
+    // UTILIDADES
 
     /**
      * Normaliza un texto eliminando tildes y convirtiéndolo a minúsculas,
      * para que la comparación con las palabras clave no falle por el formato.
-     *
-     * @param texto texto original
-     * @return texto normalizado
      */
     private String normalizarTexto(String texto) {
         if (texto == null) return "";
@@ -345,9 +323,6 @@ public class AgenteAnalizadorEmocional extends AgentBase {
     /**
      * Envía un mensaje FAILURE al agente solicitante cuando no se puede
      * completar el análisis emocional correctamente.
-     *
-     * @param request mensaje original recibido
-     * @param errorMessage descripción del error
      */
     private void enviarFailure(ACLMessage request, String errorMessage) {
         try {
