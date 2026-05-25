@@ -193,7 +193,7 @@ public class AgenteRecomendadorMusical extends AgentBase {
 
                 // Dividimos la línea usando punto y coma como separador
                 // El -1 mantiene campos vacíos si los hubiera
-                String[] fields = line.split(";", -1);
+                String[] fields = line.replace("\"", "").split(";", -1);
 
                 // Si la línea no tiene todos los campos necesarios, la ignoramos
                 if (fields.length < 6) {
