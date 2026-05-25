@@ -6,7 +6,7 @@ Sistema inteligente multiagente desarrollado con **JADE** que analiza el tono em
 
 ---
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
 El usuario introduce un texto o carga un fichero `.txt`. El sistema procesa la información a través de cuatro agentes que se comunican entre sí:
 
@@ -17,7 +17,7 @@ El usuario introduce un texto o carga un fichero `.txt`. El sistema procesa la i
 
 ---
 
-## 🛠️ Tecnologías y Dependencias
+## Tecnologías y Dependencias
 
 - **Lenguaje**: Java 8 o superior
 - **Framework**: JADE 4.6.0
@@ -36,14 +36,14 @@ Asegúrate de tener en tu proyecto las siguientes librerías en el **Build Path*
 
 ---
 
-## 🚀 Instrucciones de Instalación
+## Instrucciones de Instalación
 
 1. Clonar o descargar el repositorio.
 2. Importar el proyecto en **Eclipse** como "Existing Java Project".
 3. Asegurarse de que las librerías de JADE estén correctamente configuradas en el **Build Path**.
 
    
-## 🚀 Instrucciones de Ejecución
+## Instrucciones de Ejecución
 
 1. Abrir el proyecto en Eclipse.
 2. Ejecutar la clase principal:  
@@ -57,7 +57,7 @@ Asegúrate de tener en tu proyecto las siguientes librerías en el **Build Path*
 Puedes encontrar ejemplos de textos de prueba en la carpeta pruebas.
 
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura del Sistema
 
 **Agentes:**
 - **AgenteInterfaz** → Coordina el flujo y muestra la GUI
@@ -105,3 +105,22 @@ flowchart TD
 ```
 
 ## Declaración de IA (cómo la hemos usado, si la hemos usado).
+Durante el desarrollo de la práctica se ha utilizado inteligencia artificial como herramienta de apoyo, principalmente para tareas de organización, diseño y revisión. 
+
+En primer lugar, se utilizó para plantear las decisiones iniciales del sistema antes de que cada miembro comenzara a trabajar de forma individual. Por ejemplo, qué tipo de entrada debemos aceptar, qué agente coordina al resto o qué clases comunes creamos para pasar información de un agente a otro.
+
+También se utilizó para ayudar en la elaboración del diagrama de arquitectura del sistema, especialmente para representar el flujo de comunicación entre los agentes. En este caso, la IA sirvió como apoyo para estructurar el diagrama en Mermaid, mostrando cómo el agente de interfaz coordina al resto de agentes, cómo se utilizan los mensajes ACL y qué objetos se intercambian durante la ejecución.
+
+Además, se empleó como herramienta de apoyo en la programación, especialmente para resolver dudas relacionadas con JADE, el Directory Facilitator, los mensajes ACL y la estructura de algunos agentes. También se utilizó para revisar fragmentos de código, detectar posibles errores, proponer mejoras y aclarar el funcionamiento de partes concretas del sistema. 
+
+En resumen, la IA se ha utilizado como asistente de apoyo para la planificación, documentación, diseño de arquitectura y revisión de código, manteniendo siempre el desarrollo y la adaptación final del proyecto bajo responsabilidad del grupo.
+
+
+
+
+
+
+
+
+
+
